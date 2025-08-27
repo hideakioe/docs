@@ -5,3 +5,5 @@ collections:
   articles:
     output: true
     permalink: /articles/:name/
+include:
+  - articles.html
