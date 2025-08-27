@@ -1,9 +1,15 @@
 title: pj:MOSACC tool & talk
 description: 日本語の自由さと構造化の両立は可能なのか？
 theme: minima
+
+# Project Pages 用（https://hideakioe.github.io/docs/）
+url: "https://hideakioe.github.io"
+baseurl: "/docs"
+
 collections:
   articles:
     output: true
     permalink: /articles/:name/
+
 include:
   - articles.html
