@@ -3,13 +3,46 @@ layout: default
 title: 記事一覧
 permalink: /articles.html
 ---
-{{ page.title }}
-{%- assign docs = site.articles | default: site.collections['articles'].docs -%} {%- assign docs = docs | sort: "date" | reverse -%} {%- if docs and docs != empty -%} {%- for article in docs -%}
-{{ article.title | default: article.name }}
-{%- if article.date -%} {{ article.date | date: "%Y-%m-%d" }} {%- if article.author %} · {{ article.author }}{% endif -%} {%- endif -%} {%- if article.excerpt -%}
-{{ article.excerpt | strip_html | truncate: 160 }}
 
-{%- endif -%}
-{%- endfor -%} {%- else -%}
-（まだ記事がありません）
-{%- endif -%}
+<h1>{{ page.title }}</h1>
+
+<ul class="post-list">
+  {%- assign docs = site.articles | default: site.collections['articles'].docs -%}
+  {%- assign docs = docs | sort: "date" | reverse -%}
+
+  {%- if docs and docs != empty -%}
+    {%- for article in docs -%}
+      <li class="post-item">
+        <h2 class="post-title">
+          <a href="{{ article.url | relative_url }}">
+            {{ article.title | default: article.name }}
+          </a>
+        </h2>
+
+        {%- if article.date -%}
+          <small class="post-meta">
+            {{ article.date | date: "%Y-%m-%d" }}
+            {%- if article.author %} · {{ article.author }}{% endif -%}
+          </small>
+        {%- endif -%}
+
+        {%- if article.excerpt -%}
+          <p class="post-excerpt">
+            {{ article.excerpt | strip_html | truncate: 160 }}
+          </p>
+        {%- endif -%}
+      </li>
+    {%- endfor -%}
+  {%- else -%}
+    <li>（まだ記事がありません）</li>
+  {%- endif -%}
+</ul>
+
+<style>
+.post-list { list-style: none; padding-left: 0; }
+.post-item { margin: 1.2rem 0; }
+.post-title { margin: 0 0 .2rem; font-size: 1.2rem; }
+.post-title a { color: inherit; text-decoration: none; }
+.post-title a:hover { text-decoration: underline; }
+.post-excerpt { margin: .35rem 0 0; color: #555; }
+</style>
