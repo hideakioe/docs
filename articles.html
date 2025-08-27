@@ -1,4 +1,8 @@
---- layout: default title: 記事一覧 permalink: /articles.html ---
+---
+layout: default
+title: 記事一覧
+permalink: /articles.html
+---
 {{ page.title }}
 {% assign docs = site.articles %} {% if docs == nil %} {% assign docs = site.collections['articles'].docs %} {% endif %} {% for article in docs %}
 {{ article.title | default: article.name }} {% if article.date %} — {{ article.date | date: "%Y-%m-%d" }} {% endif %}
